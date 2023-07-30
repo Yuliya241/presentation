@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1 style="background-image: linear-gradient(90deg, #E3535D, #2AA5A0);
+					-webkit-text-fill-color: transparent; background-clip: border-box; -webkit-background-clip: text;">
+					Context<br>(lexical
+					environment)</h1>
+			</section>
+			<section>
+				<section id="fragments">
+					<p>JavaScript has 3 types of scope:</p>
+					<ul>
+						<li class="fragment fade-up">Block scope</li>
+						<li class="fragment fade-up">Function scope</li>
+						<li class="fragment fade-up">Global scope</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<p>Block scope</p>
+					<pre><code class="fragment fade-down" data-trim data-noescape>
+					{
+						let name = "alex";
+					  }
+					  // x can NOT be used here
+					  </code></pre>
+					<pre><code class="fragment fade-down" data-trim data-noescape>
+						{
+							var x = 2;
+						  }
+						  // x CAN be used here
+						  </code></pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<p>Function scope</p>
+					<pre><code class="fragment fade-down" data-trim data-noescape>
+					function myFunction() {
+						var carName = "Volvo";   // Function Scope
+					  }
+					  </code></pre>
+					<pre><code class="fragment fade-down" data-trim data-noescape>
+					function myFunction() {
+						let carName = "Volvo";   // Function Scope
+					  }
+						  </code></pre>
+					<pre><code class="fragment fade-down" data-trim data-noescape>
+							function myFunction() {
+								const carName = "Volvo";   // Function Scope
+							  }
+								  </code></pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					<p>Global scope</p>
+					<pre><code class="fragment fade-down" data-trim data-noescape>
+						var carName = "Volvo";   // Global scope
+						
+						function myFunction() {
+						// code here can also use carName
+						}
+					  </code></pre>
+					<pre><code class="fragment fade-down" data-trim data-noescape>
+						let carName = "Volvo";   // Global scope
+						
+						function myFunction() {
+						// code here can also use carName
+						}
+						  </code></pre>
+					<pre><code class="fragment fade-down" data-trim data-noescape>
+						const carName = "Volvo";   // Global scope
+						
+						function myFunction() {
+						// code here can also use carName
+						}
+								  </code></pre>
+				</section>
+			</section>
+			<section>
+				<p>Execution Context</p>
+				<img class="r-frame" width="500" height="400" data-src="./assets/context.png" alt="context">
+			</section>
+			<section>
+				<section>
+					<p>There are three types of <span style="color: #b34249">execution context</span> in JavaScript:</p>
+					<ol>
+						<li class="fragment fade-left">Global Execution Context</li>
+						<li class="fragment fade-left">Functional Execution Context</li>
+						<li class="fragment fade-left">Eval Function Execution Context</li>
+					</ol>
+				</section>
+			</section>
+			<section>
+				<p>The Call (Execution) Stack</p>
+				<div style="display: flex; justify-content: space-between;">
+					<div>
+						<span style="font-size: 30px">Example:</span>
+						<pre style="width: 100%"><code data-trim data-noescape>
+							function greeting() { 
+								sayHi();
+							 }
+							 
+							function sayHi() {
+								return "Hi!";
+							 }
+							 
+							// Invoke the `greeting`
+							function greeting();
+						  </code></pre>
+					</div>
+					<div>
+						<img style="margin-top: 20px;" class="r-frame" width="600" height="400"
+							data-src="./assets/stack.png" alt="stack">
+					</div>
+				</div>
+			</section>
+			<section>
+				<section>
+					<p>The execution context is created in two stages:</p>
+					<ol>
+						<li class="fragment fade-left">Creation stage</li>
+						<li class="fragment fade-left">Execution stage</li>
+					</ol>
+				</section>
+			</section>
+			<section>
+				<section>
+					<p>Lexical Environment
+						<br />
+						<br />
+					</p>
+					<p style="font-size: 35px">A lexical environment is created in the creation stage of the execution
+						context.<br />
+						<br />
+					</p>
+					<p style="font-size: 35px" class="fragment fade-left"><span style="color: #b34249">Lexical
+							Environment</span> is a
+						specification type based on the lexical nesting structure of JavaScript code and used to
+						define the association of identifiers to the values of variables and functions. <br />
+						<br />
+					</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<p><span style="color: #b34249">The Lexical Environment</span> has three components:</p>
+					<ul>
+						<li class="fragment fade-left">Environment Record</li>
+						<li class="fragment fade-left">Reference to the outer environment</li>
+						<li class="fragment fade-left">The <span style="color: #4227bc">this</span> binding</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<p><span style="color: #b34249">The environment record</span> is the place where the variable and
+						function declarations are stored inside the lexical environment.<br />
+						<br />
+					</p>
+					<p class="fragment fade-left">There are also two types of environment record:</p>
+					<ul>
+						<li class="fragment fade-left">Declarative Environment Record</li>
+						<li class="fragment fade-left">Object Environment Record</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<p>A new lexical environment is formed every time a function or block is executed. The environment
+					record of this lexical environment will contain all the variables and functions declared within
+					that particular function or block. For example:<br />
+					<br />
+				</p>
+				<pre style="width: 100%" class="fragment fade-left"><code data-trim data-noescape>
+					function lexicalFn() {
+						let a = 1;
+						let b = 3;
+					  }
+					  </code></pre>
+			</section>
+			<section>
+				<p>The <span style="color: #4227bc">this</span> binding<br />
+					<br />
+				</p>
+				<pre style="width: 100%" class="fragment fade-left"><code data-trim data-noescape>
+					let obj = {
+						a: 2,
+						b: 4,
+						getSum: function () {
+						  return this.a + this.b;
+						},
+					  };
+					  console.log(obj.getSum()); // 6
+					  </code></pre>
+			</section>
+			<section>
+				<p>Resources:</p>
+				<ul style="font-size: 30px;">
+					<li><a
+							href="https://www.geeksforgeeks.org/what-is-variable-scope-in-javascript/">https://www.geeksforgeeks.org/what-is-variable-scope-in-javascript/</a>
+					</li>
+					<li><a
+							href="https://www.freecodecamp.org/news/understanding-let-const-and-var-keywords/">https://www.freecodecamp.org/news/understanding-let-const-and-var-keywords/</a>
+					</li>
+					<li><a
+							href="https://www.w3schools.com/js/js_scope.asp">https://www.w3schools.com/js/js_scope.asp</a>
+					</li>
+					<li><a
+							href="https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0">https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0</a>
+					</li>
+					<li><a
+							href="https://blog.openreplay.com/explaining-javascript-s-execution-context-and-stack/">https://blog.openreplay.com/explaining-javascript-s-execution-context-and-stack/</a>
+					</li>
+					<li><a
+							href="https://www.frontendmag.com/tutorials/lexical-environment-in-javascript/">https://www.frontendmag.com/tutorials/lexical-environment-in-javascript/</a>
+					</li>
+					<li><a
+							href="https://www.borderlessengineer.com/post/how-js-works-lexical-environment">https://www.borderlessengineer.com/post/how-js-works-lexical-environment</a>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<p style="font-size: 50px; background-image: linear-gradient(90deg, #53e385, #722aa5);
+				-webkit-text-fill-color: transparent; background-clip: border-box; -webkit-background-clip: text;">Thank you for
+					attention!</p>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
